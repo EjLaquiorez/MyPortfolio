@@ -40,8 +40,7 @@ Palawan State University *(Expected Graduation: 2025)*
 
 ## 📫 Contact
 - **Email:** [ejlqrz@gmail.com](mailto:your-ejlqrz@gmail.com)
-- **LinkedIn:** [your-linkedin-profile](#)
-- **Portfolio Website:** [your-portfolio-link](#) *(Coming Soon)*
+- **Portfolio Website:** [MyPortfolio.html](#) *(Coming Soon)*
 
 ---
 Thank you for visiting my portfolio! Feel free to reach out for collaborations, feedback, or just to connect.
