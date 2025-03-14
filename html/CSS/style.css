@@ -71,6 +71,7 @@ a:hover {
 .dashboard-container {
   display: flex;
   height: 100vh;
+  overflow: hidden; /* Hide overflow */
 }
 
 /* SIDEBAR */
@@ -83,7 +84,7 @@ a:hover {
   flex-direction: column;
   padding: 20px;
   position: fixed;
-  display: hidden;
+  overflow: hidden;
 }
 
 .sidebar h2 {
@@ -129,6 +130,16 @@ a:hover {
   display: block;
 }
 
+/* HIDE SCROLLBAR */
+.content::-webkit-scrollbar {
+  display: none;
+}
+
+.content {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
   .sidebar {
@@ -158,7 +169,6 @@ a:hover {
     display: inline;
   }
 }
-
 
 /* SECTIONS */
 
