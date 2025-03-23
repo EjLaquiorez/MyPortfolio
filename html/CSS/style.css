@@ -505,3 +505,68 @@ footer p {
   top: -10px;
   cursor: default;
 }
+
+/* Modal Background */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+/* Modal Content Box */
+.modal-content {
+  background-color: #fff;
+  padding: 20px 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 300px;
+}
+
+/* Modal Buttons */
+.modal-buttons {
+  margin-top: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Button Styles */
+.btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Confirm Button */
+.btn-confirm {
+  background-color: #e3342f;
+  color: #fff;
+}
+
+.btn-confirm:hover {
+  background-color: #c53030;
+}
+
+/* Cancel Button */
+.btn-cancel {
+  background-color: #ddd;
+  color: #333;
+}
+
+.btn-cancel:hover {
+  background-color: #bbb;
+}
+
+/* Hide Modal Initially */
+.hidden {
+  display: none;
+}

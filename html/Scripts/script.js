@@ -168,3 +168,18 @@ function logout() {
     window.location.href = "index.html";
   }
 }
+
+// Show the logout confirmation modal
+function logout() {
+  document.getElementById('logout-modal').classList.remove('hidden');
+}
+
+// Confirm Logout - Redirect to index.html
+function confirmLogout() {
+  window.location.href = 'index.html';
+}
+
+// Close the modal
+function closeModal() {
+  document.getElementById('logout-modal').classList.add('hidden');
+}
