@@ -136,3 +136,35 @@ document.querySelector(".logout-btn").addEventListener("click", function () {
   alert("You have been logged out!");
   window.location.href = "index.html"; // Redirect to login page
 });
+
+// Toggle profile menu visibility
+function toggleProfileMenu() {
+  const menu = document.getElementById("profile-menu");
+  menu.classList.toggle("hidden");
+}
+
+// Close profile menu if clicked outside
+window.onclick = function (event) {
+  if (!event.target.matches(".profile-icon")) {
+    const menu = document.getElementById("profile-menu");
+    if (!menu.classList.contains("hidden")) {
+      menu.classList.add("hidden");
+    }
+  }
+};
+
+// Edit profile function
+function editProfile() {
+  alert("Redirecting to Edit Profile...");
+  // Example: Redirect to profile settings page
+  window.location.href = "profile.html";
+}
+
+// Logout function
+function logout() {
+  const confirmLogout = confirm("Are you sure you want to log out?");
+  if (confirmLogout) {
+    // Redirect to the login page or index.html
+    window.location.href = "index.html";
+  }
+}

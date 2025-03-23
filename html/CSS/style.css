@@ -455,3 +455,53 @@ footer p {
   text-align: center;
 }
 
+/* Profile Settings Icon */
+.profile-settings {
+  position: absolute;
+  bottom: 50px;
+  display: inline-block;
+  cursor: pointer;
+}
+
+/* Profile Menu Container */
+.profile-menu {
+  position: absolute;
+  bottom: 10px;
+  left: 40px; /* Adjusted to ensure visibility */
+  background-color: #fff;
+  border: 1px solid #ddd;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  width: 150px;
+  z-index: 100;
+}
+
+/* Menu Button Styles */
+.profile-menu button {
+  width: 100%;
+  padding: 10px 15px;
+  border: none;
+  background-color: transparent;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+/* Button Hover Effect */
+.profile-menu button:hover {
+  background-color: #f4f4f4;
+}
+
+/* Hide Menu Initially */
+.hidden {
+  display: none;
+}
+/* Profile Name Style */
+.profile-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #f4f4f4;
+  position: relative;
+  top: -10px;
+  cursor: default;
+}
