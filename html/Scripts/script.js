@@ -29,10 +29,11 @@ function loginUser(username, password) {
 
   if (user) {
       localStorage.setItem("currentUser", JSON.stringify(user));
-      alert("Login successful!");
       window.location.href = "dashboard.html"; // Redirect to user profile page
   } else {
-      alert("Invalid username or password. Try again.");
+      const passwordInput = document.getElementById("password");
+      passwordInput.setCustomValidity("Invalid username or password. Try again.");
+      passwordInput.reportValidity();
   }
 }
 
