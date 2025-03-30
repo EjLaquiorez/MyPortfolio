@@ -1,0 +1,85 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ddd;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.quiz-container {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 600px;
+    padding: 20px;
+    text-align: center;
+}
+
+.quiz-header {
+    margin-bottom: 20px;
+}
+
+.question {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.option {
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.option:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+.timer {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    color: #ff5722;
+}
+
+.result {
+    font-size: 1.5em;
+    color: #4caf50;
+}
+
+.restart-btn,
+.start-btn {
+    background-color: #333; /* Base color for buttons */
+    color: #fff; /* White text for contrast */
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 20px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.restart-btn:hover,
+.start-btn:hover {
+    background-color: #555; /* Slightly lighter shade for hover effect */
+    transform: scale(1.05); /* Subtle zoom effect on hover */
+}
+
+.restart-btn:active,
+.start-btn:active {
+    background-color: #111; /* Darker shade for active state */
+    transform: scale(0.95); /* Slightly shrink on click */
+}

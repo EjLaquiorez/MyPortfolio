@@ -8,25 +8,32 @@
     <script src="Scripts/script.js"></script>
 </head>
 <body>
+  <!-- Menu Button for Small Screens -->
+<button class="menu-btn" id="menu-btn" onclick="toggleSidebar()">
+  <div class="menu-icon"></div>
+</button>
     <div class="dashboard-container">
-        <aside class="sidebar">
-            <h2>Dashboard</h2>
-            <ul>             
-                <li><a href="#overview" onclick="showSection('overview')">Overview</a></li>
-                <li><a href="#about" onclick="showSection('about')">About</a></li>
-                <li><a href="#experience" onclick="showSection('experience')">Experience</a></li>
-                <li><a href="#projects" onclick="showSection('projects')">Projects</a></li>
-                <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
-                <div class="profile-settings" title="Profile Settings">
-                  <img src="./assets/profile-pic.png" alt="Profile png" class="icon profile-icon" onclick="toggleProfileMenu()" />
-                  <span class="profile-name">Earl Laquiorez</span>
-                  <div id="profile-menu" class="profile-menu hidden">
-                    <button onclick="editProfile()">Edit Profile</button>
-                    <button onclick="logout()">Logout</button>
-                  </div>
-                </div>
-            </ul>
-        </aside>
+      <aside class="sidebar">
+        <h2>Dashboard</h2>
+        <ul>             
+          <li><a href="#overview" onclick="showSection('overview')">Overview</a></li>
+          <li><a href="#about" onclick="showSection('about')">About</a></li>
+          <li><a href="#experience" onclick="showSection('experience')">Experience</a></li>
+          <li><a href="#projects" onclick="showSection('projects')">Projects</a></li>
+          <li><a href="#quiz" onclick="showSection('quiz')">Quiz</a></li>
+          <li><a href="#contact" onclick="showSection('contact')">Contact</a></li>
+          <div class="profile-settings" title="Profile Settings">
+            <img src="./assets/profile-pic.png" alt="Profile png" class="icon profile-icon" onclick="toggleProfileMenu()" />
+            <span class="profile-name">Earl Laquiorez</span>
+            <div id="profile-menu" class="profile-menu hidden">
+            <button onclick="editProfile()">Edit Profile</button>
+            <button onclick="logout()">Logout</button>
+            </div>
+          </div>
+        </ul>
+      </aside>
+     
+
         <main class="content">
             <section id="overview" class="section active">
                 <h1>Overview</h1>
@@ -70,7 +77,7 @@
                         </div>
                       </div>
                       <div class="text-container">
-                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Hic quis reprehenderit et laborum, rem, dolore eum quod voluptate exercitationem nobis, nihil esse debitis maxime facere minus sint delectus velit in eos quo officiis explicabo deleniti dignissimos. Eligendi illum libero dolorum cum laboriosam corrupti quidem, reiciendis ea magnam? Nulla, impedit fuga!</p>
+                        <p>Hello! My name is Earl Laquiorez, and I am a passionate Frontend Developer with over a year of experience in creating visually appealing and user-friendly web applications. I am currently pursuing a Bachelor's degree in Computer Science, where I continue to hone my skills and expand my knowledge in the field of technology. I thrive on solving problems, learning new technologies, and bringing creative ideas to life through code. Let's build something amazing together!</p>
                       </div>
                     </div>
                   </div>
@@ -204,6 +211,16 @@
                   </div>
                   <img src="./assets/arrow.png" alt="Arrow icon" class="icon arrow" onclick="location.href='./#contact'" />
                 </section>
+                <section id="quiz">
+                  <div class="contact-info-container">
+                    <div class="quiz-info-container">
+                      <div class="quiz-text">
+                        <p>Test your knowledge and skills by taking a fun and engaging quiz!</p>
+                        <iframe src="quiz.html" class="quiz-iframe" frameborder="0"></iframe>
+                      </div>
+                    </div>
+                  </div>
+                </section>
                 <section id="contact">
                   <p class="section__text__p1">Get in Touch</p>
                   <h1 class="title">Contact Me</h1>
@@ -217,18 +234,8 @@
                       <p><a href="https://www.linkedin.com">LinkedIn</a></p>
                     </div>
                   </div>
-                </section>
+                    </section>
                 <footer>
-                  <nav>
-                    <div class="nav-links-container">
-                      <ul class="nav-links">
-                        <li><a href="#about">About</a></li>
-                        <li><a href="#experience">Experience</a></li>
-                        <li><a href="#projects">Projects</a></li>
-                        <li><a href="#contact">Contact</a></li>
-                      </ul>
-                    </div>
-                  </nav>
                   <p>Copyright &#169; 2025 Earl Laquiorez. All Rights Reserved.</p>
                 </footer>
             </section>

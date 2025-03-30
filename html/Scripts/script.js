@@ -1,19 +1,50 @@
-function toggleMenu() {
-  const menu = document.querySelector(".menu-links");
-  const icon = document.querySelector(".hamburger-icon");
-  menu.classList.toggle("open");
-  icon.classList.toggle("open");
+// -------------------- MENU TOGGLE -------------------- //
+// Toggle Sidebar for Small Screens
+function toggleSidebar() {
+  const sidebar = document.querySelector('.sidebar');
+  const menuBtn = document.querySelector('.menu-btn');
+  sidebar.classList.toggle('show');
+  menuBtn.classList.toggle('active');
 }
 
 
+// -------------------- SIDEBAR TOGGLE -------------------- //
+const menuBtn = document.getElementById("menu-btn");
+const sidebar = document.querySelector(".sidebar");
+const content = document.querySelector(".content");
+
+// Toggle sidebar on menu button click
+menuBtn.addEventListener("click", () => {
+  sidebar.classList.toggle("collapsed");
+  content.classList.toggle("expanded");
+});
+
+// Automatically hide/show sidebar based on window size
+window.addEventListener("resize", () => {
+  if (window.innerWidth <= 768) {
+    sidebar.classList.add("collapsed");
+    content.classList.add("expanded");
+  } else {
+    sidebar.classList.remove("collapsed");
+    content.classList.remove("expanded");
+  }
+});
+
+// Initial check on page load
+if (window.innerWidth <= 768) {
+  sidebar.classList.add("collapsed");
+  content.classList.add("expanded");
+}
+
+// -------------------- USER AUTHENTICATION -------------------- //
 // User Registration (Save to LocalStorage)
 function registerUser(username, email, password) {
   const users = JSON.parse(localStorage.getItem("users")) || [];
   const userExists = users.find(user => user.username === username);
 
   if (userExists) {
-      alert("Username already exists! Try a different one.");
-      return false;
+    alert("Username already exists! Try a different one.");
+    return false;
   }
 
   users.push({ username, email, password });
@@ -28,43 +59,42 @@ function loginUser(username, password) {
   const user = users.find(user => user.username === username && user.password === password);
 
   if (user) {
-      localStorage.setItem("currentUser", JSON.stringify(user));
-      window.location.href = "dashboard.html"; // Redirect to user profile page
+    localStorage.setItem("currentUser", JSON.stringify(user));
+    window.location.href = "dashboard.html"; // Redirect to dashboard
   } else {
-      const passwordInput = document.getElementById("password");
-      passwordInput.setCustomValidity("Invalid username or password. Try again.");
-      passwordInput.reportValidity();
+    const passwordInput = document.getElementById("password");
+    passwordInput.setCustomValidity("Invalid username or password. Try again.");
+    passwordInput.reportValidity();
   }
 }
 
-// Handle form submission
+// -------------------- FORM HANDLERS -------------------- //
 document.addEventListener("DOMContentLoaded", () => {
   const loginForm = document.querySelector("form");
-  
-  if (loginForm) {
-      loginForm.addEventListener("submit", function (e) {
-          e.preventDefault();
-          const username = document.getElementById("username").value;
-          const password = document.getElementById("password").value;
+  const registerForm = document.getElementById("registerForm");
 
-          loginUser(username, password);
-      });
+  if (loginForm) {
+    loginForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.getElementById("username").value;
+      const password = document.getElementById("password").value;
+      loginUser(username, password);
+    });
+  }
+
+  if (registerForm) {
+    registerForm.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const username = document.getElementById("registerUsername").value;
+      const email = document.getElementById("registerEmail").value;
+      const password = document.getElementById("registerPassword").value;
+      registerUser(username, email, password);
+    });
   }
 });
-const registerForm = document.getElementById("registerForm");
 
-if (registerForm) {
-  registerForm.addEventListener("submit", function (e) {
-    e.preventDefault();
-    const username = document.getElementById("registerUsername").value;
-    const email = document.getElementById("registerEmail").value;
-    const password = document.getElementById("registerPassword").value;
-
-    registerUser(username, email, password);
-  });
-}
-
-// Function to load user data in the dashboard
+// -------------------- DASHBOARD FUNCTIONS -------------------- //
+// Load user data in the dashboard
 function loadDashboard() {
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
@@ -79,7 +109,7 @@ function loadDashboard() {
   document.getElementById("profileEmail").value = currentUser.email;
 }
 
-// Function to update user profile
+// Update user profile
 function updateProfile(event) {
   event.preventDefault();
 
@@ -89,7 +119,6 @@ function updateProfile(event) {
   const email = document.getElementById("profileEmail").value;
   const password = document.getElementById("profilePassword").value;
 
-  // Find user in storage
   const userIndex = users.findIndex(user => user.username === currentUser.username);
   if (userIndex !== -1) {
     users[userIndex].email = email;
@@ -97,47 +126,20 @@ function updateProfile(event) {
       users[userIndex].password = password; // Update password if entered
     }
 
-    // Save updated data
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("currentUser", JSON.stringify(users[userIndex]));
-
     alert("Profile updated successfully!");
   }
 }
 
-// Function to handle logout
+// Logout user
 function logoutUser() {
   localStorage.removeItem("currentUser");
   alert("You have been logged out!");
   window.location.href = "index.html";
 }
 
-// Event Listeners
-document.addEventListener("DOMContentLoaded", () => {
-  if (document.getElementById("profileForm")) {
-    loadDashboard();
-    document.getElementById("profileForm").addEventListener("submit", updateProfile);
-  }
-
-  if (document.getElementById("logoutBtn")) {
-    document.getElementById("logoutBtn").addEventListener("click", logoutUser);
-  }
-});
-const navTabs = document.querySelectorAll("#nav-tabs > a");
-navTabs.forEach((tab) => {
-  tab.addEventListener("click", () => {
-    navTabs.forEach((tab) => {
-      tab.classList.remove("active");
-    });
-    tab.classList.add("active");
-  });
-});
-//last script
-document.querySelector(".logout-btn").addEventListener("click", function () {
-  alert("You have been logged out!");
-  window.location.href = "index.html"; // Redirect to login page
-});
-
+// -------------------- PROFILE MENU -------------------- //
 // Toggle profile menu visibility
 function toggleProfileMenu() {
   const menu = document.getElementById("profile-menu");
@@ -154,33 +156,28 @@ window.onclick = function (event) {
   }
 };
 
-// Edit profile function
-function editProfile() {
-  alert("Redirecting to Edit Profile...");
-  // Example: Redirect to profile settings page
-  window.location.href = "profile.html";
-}
-
-// Logout function
-function logout() {
-  const confirmLogout = confirm("Are you sure you want to log out?");
-  if (confirmLogout) {
-    // Redirect to the login page or index.html
-    window.location.href = "index.html";
+// -------------------- EVENT LISTENERS -------------------- //
+document.addEventListener("DOMContentLoaded", () => {
+  if (document.getElementById("profileForm")) {
+    loadDashboard();
+    document.getElementById("profileForm").addEventListener("submit", updateProfile);
   }
+
+  if (document.getElementById("logoutBtn")) {
+    document.getElementById("logoutBtn").addEventListener("click", logoutUser);
+  }
+});
+
+// -------------------- LOGOUT MODAL -------------------- //
+function showLogoutModal() {
+  document.getElementById("logout-modal").classList.remove("hidden");
 }
 
-// Show the logout confirmation modal
-function logout() {
-  document.getElementById('logout-modal').classList.remove('hidden');
-}
-
-// Confirm Logout - Redirect to index.html
 function confirmLogout() {
-  window.location.href = 'index.html';
+  window.location.href = "index.html";
 }
 
-// Close the modal
 function closeModal() {
-  document.getElementById('logout-modal').classList.add('hidden');
+  document.getElementById("logout-modal").classList.add("hidden");
 }
+

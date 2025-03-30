@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Page</title>
+    <link rel="stylesheet" href="Quiz files/style.css">
+    <script src="Quiz files/script.js" defer></script>
+</head>
+<body>
+
+    <div class="quiz-container">
+        <!-- Header -->
+        <div class="quiz-header">
+            <h1>Quiz</h1>
+        </div>
+
+        <!-- Start Quiz Button -->
+        <div>
+            <button id="start-quiz" class="start-btn" type="button">Start Quiz</button>
+        </div>
+
+        <!-- Quiz Questions -->
+        <div id="quiz" style="display: none;">
+            <div class="timer">Time Left: <span id="time">30</span>s</div>
+            <div class="question">Question will appear here</div>
+            <div class="options"></div>
+            <div class="result" style="display: none;">Your score: <span id="score">0</span></div>
+            <button class="restart-btn" style="display: none;">Restart Quiz</button>
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+            <button id="submit" class="submit-btn" type="button" style="display: none;">Submit</button>
+        </div>
+
+        <!-- Results -->
+        <div id="results"></div>
+    </div>
+
+</body>
+</html>
