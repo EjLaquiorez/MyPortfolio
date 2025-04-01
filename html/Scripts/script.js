@@ -7,7 +7,6 @@ function toggleSidebar() {
   menuBtn.classList.toggle('active');
 }
 
-
 // -------------------- SIDEBAR TOGGLE -------------------- //
 const menuBtn = document.getElementById("menu-btn");
 const sidebar = document.querySelector(".sidebar");
@@ -56,15 +55,16 @@ function registerUser(username, email, password) {
 // User Login (Check credentials)
 function loginUser(username, password) {
   const users = JSON.parse(localStorage.getItem("users")) || [];
+  console.log("Users in localStorage:", users); // Debugging
   const user = users.find(user => user.username === username && user.password === password);
 
   if (user) {
     localStorage.setItem("currentUser", JSON.stringify(user));
+    console.log("Login successful! Redirecting to dashboard..."); // Debugging
     window.location.href = "dashboard.html"; // Redirect to dashboard
   } else {
-    const passwordInput = document.getElementById("password");
-    passwordInput.setCustomValidity("Invalid username or password. Try again.");
-    passwordInput.reportValidity();
+    console.log("Invalid username or password."); // Debugging
+    alert("Invalid username or password. Please try again.");
   }
 }
 
@@ -76,8 +76,8 @@ document.addEventListener("DOMContentLoaded", () => {
   if (loginForm) {
     loginForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      const username = document.getElementById("username").value;
-      const password = document.getElementById("password").value;
+      const username = document.getElementById("username").value.trim();
+      const password = document.getElementById("password").value.trim();
       loginUser(username, password);
     });
   }
@@ -91,6 +91,58 @@ document.addEventListener("DOMContentLoaded", () => {
       registerUser(username, email, password);
     });
   }
+});
+
+// Handle modal open and close
+document.addEventListener("DOMContentLoaded", () => {
+  const modal = document.getElementById("id01");
+  const closeModalButton = document.querySelector(".close");
+
+  // Open modal when the login button is clicked
+  document.querySelector("button[onclick*='id01']").addEventListener("click", () => {
+    modal.style.display = "block";
+  });
+
+  // Close modal when the close button is clicked
+  closeModalButton.addEventListener("click", () => {
+    modal.style.display = "none";
+  });
+
+  // Close modal when clicking outside of it
+  window.addEventListener("click", (event) => {
+    if (event.target === modal) {
+      modal.style.display = "none";
+    }
+  });
+
+  // Handle login form submission
+  const loginForm = document.querySelector(".modal-content");
+  loginForm.addEventListener("submit", function (e) {
+    e.preventDefault(); // Prevent default form submission
+
+    const username = document.querySelector("input[name='uname']").value.trim();
+    const password = document.querySelector("input[name='psw']").value.trim();
+
+    // Check if username and password are provided
+    if (!username || !password) {
+      alert("Please enter both username and password.");
+      return;
+    }
+
+    // Retrieve users from localStorage
+    const users = JSON.parse(localStorage.getItem("users")) || [];
+    const user = users.find(user => user.username === username && user.password === password);
+
+    if (user) {
+      // Save the current user to localStorage
+      localStorage.setItem("currentUser", JSON.stringify(user));
+      alert("Login successful!");
+      modal.style.display = "none"; // Close the modal
+      window.location.href = "dashboard.html"; // Redirect to dashboard
+    } else {
+      alert("Invalid username or password. Please try again.");
+    }
+  });
 });
 
 // -------------------- DASHBOARD FUNCTIONS -------------------- //
@@ -133,10 +185,27 @@ function updateProfile(event) {
 }
 
 // Logout user
-function logoutUser() {
+function logout() {
   localStorage.removeItem("currentUser");
   alert("You have been logged out!");
   window.location.href = "index.html";
+}
+
+// Show logout confirmation modal
+function showLogoutModal() {
+  document.getElementById("logout-modal").classList.remove("hidden");
+}
+
+// Confirm logout
+function confirmLogout() {
+  localStorage.removeItem("currentUser");
+  alert("You have been logged out!");
+  window.location.href = "index.html";
+}
+
+// Close logout modal
+function closeModal() {
+  document.getElementById("logout-modal").classList.add("hidden");
 }
 
 // -------------------- PROFILE MENU -------------------- //
@@ -166,6 +235,24 @@ document.addEventListener("DOMContentLoaded", () => {
   if (document.getElementById("logoutBtn")) {
     document.getElementById("logoutBtn").addEventListener("click", logoutUser);
   }
+
+  // Attach event listener to logout button if it exists
+  const logoutButton = document.querySelector("button[onclick='logout()']");
+  if (logoutButton) {
+    logoutButton.addEventListener("click", logout);
+  }
+
+  // Attach event listeners for modal buttons
+  const confirmButton = document.querySelector(".btn-confirm");
+  const cancelButton = document.querySelector(".btn-cancel");
+
+  if (confirmButton) {
+    confirmButton.addEventListener("click", confirmLogout);
+  }
+
+  if (cancelButton) {
+    cancelButton.addEventListener("click", closeModal);
+  }
 });
 
 // -------------------- LOGOUT MODAL -------------------- //
@@ -181,3 +268,7 @@ function closeModal() {
   document.getElementById("logout-modal").classList.add("hidden");
 }
 
+localStorage.setItem("users", JSON.stringify([
+  { username: "testuser", password: "password123" },
+  { username: "admin", password: "admin123" }
+]));
