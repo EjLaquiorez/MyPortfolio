@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Profile</title>
+    <link rel="stylesheet" href="CSS/styleLogin.css">
+</head>
+<body>
+    <div class="main">
+        <h1>Update Your Profile</h1>
+        <h3>Modify your details below</h3>
+
+        <form id="profileForm">
+            <label for="username">Username:</label>
+            <input type="text" id="profileUsername" name="username" placeholder="Enter your Username" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="profileEmail" name="email" placeholder="Enter your Email" required>
+
+            <label for="password">New Password:</label>
+            <input type="password" id="profilePassword" name="password" placeholder="Enter a New Password (optional)">
+
+            <div class="wrap">
+                <button type="submit">Update Profile</button>
+            </div>
+        </form>
+
+        <p>Go back to the <a href="dashboard.html" style="text-decoration: none;">Dashboard</a></p>
+    </div>
+
+    <script src="Scripts/script.js"></script>
+</body>
+</html>

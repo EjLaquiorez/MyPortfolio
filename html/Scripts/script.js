@@ -161,6 +161,21 @@ function loadDashboard() {
   document.getElementById("profileEmail").value = currentUser.email;
 }
 
+// Load current user data into the update profile form
+function loadProfileForm() {
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  if (!currentUser) {
+    alert("You must log in first!");
+    window.location.href = "index.html";
+    return;
+  }
+
+  // Populate the form fields with current user data
+  document.getElementById("profileUsername").value = currentUser.username;
+  document.getElementById("profileEmail").value = currentUser.email;
+}
+
 // Update user profile
 function updateProfile(event) {
   event.preventDefault();
@@ -178,9 +193,12 @@ function updateProfile(event) {
       users[userIndex].password = password; // Update password if entered
     }
 
+    // Save updated data to localStorage
     localStorage.setItem("users", JSON.stringify(users));
     localStorage.setItem("currentUser", JSON.stringify(users[userIndex]));
     alert("Profile updated successfully!");
+  } else {
+    alert("Error: User not found.");
   }
 }
 
@@ -253,6 +271,15 @@ document.addEventListener("DOMContentLoaded", () => {
   if (cancelButton) {
     cancelButton.addEventListener("click", closeModal);
   }
+
+  // Load the profile form with current user data
+  loadProfileForm();
+
+  // Attach the updateProfile function to the form submission
+  const profileForm = document.getElementById("profileForm");
+  if (profileForm) {
+    profileForm.addEventListener("submit", updateProfile);
+  }
 });
 
 // -------------------- LOGOUT MODAL -------------------- //
@@ -272,3 +299,27 @@ localStorage.setItem("users", JSON.stringify([
   { username: "testuser", password: "password123" },
   { username: "admin", password: "admin123" }
 ]));
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Sidebar toggle
+  const menuBtn = document.getElementById("menu-btn");
+  if (menuBtn) {
+    menuBtn.addEventListener("click", () => {
+      const sidebar = document.querySelector(".sidebar");
+      const content = document.querySelector(".content");
+      sidebar.classList.toggle("collapsed");
+      content.classList.toggle("expanded");
+    });
+  }
+
+  // Edit profile function
+  const editProfileButton = document.querySelector("button[onclick='editProfile()']");
+  if (editProfileButton) {
+    editProfileButton.addEventListener("click", editProfile);
+  }
+});
+
+// Edit profile function
+function editProfile() {
+  window.location.href = "updateprofile.html"; // Redirect to the update profile page
+}
